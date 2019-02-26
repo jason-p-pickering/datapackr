@@ -37,11 +37,17 @@ round_trunc <- function(x) {
 #'
 #' @return An OU name, based on input selection.
 selectOU <- function() {
+  #TODO: Rename this variable to snake case
   ous <- datapackr::configFile %>%
     dplyr::select(DataPack_name) %>%
     dplyr::distinct()
-  promptText<-paste0("Please select the OU this file is associated with [1-",nrow(ous),"]:")
-  print(promptText)
-  selection <- utils::select.list(ous$DataPack_name,multiple=FALSE)
+  #TODO: Alter this function to only display the prompt if the ou is not supplied
+  # as a variable. 
+  prompt_text <-
+    paste0("Please select the OU this file is associated with [1-",
+           nrow(ous),
+           "]:")
+  print(prompt_text)
+  selection <- utils::select.list(ous$DataPack_name, multiple = FALSE)
   return(selection)
 }
